@@ -9,26 +9,26 @@ const Schedule = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch("https://www.gov.uk/bank-holidays.json")
+    fetch("http://localhost:5000/schedule")
       .then(res => res.json())
       .then(data => {
-        const holidays = data["england-and-wales"].events;
-
-        const formattedEvents = holidays.map(event => ({
-          title: event.title,
-          start: new Date(event.date),
-          end: new Date(new Date(event.date).getTime() + 60 * 60 * 1000),
-          notes: event.notes || "No notes",
+        const formattedEvents = data.map(event => ({
+          notes: event.notes,
+          start: moment(`${event.startDate} ${event.startTime}`, "YYYY-MM-DD HH:mm").toDate(),
+          end: moment(`${event.endDate} ${event.endTime}`, "YYYY-MM-DD HH:mm").toDate(),
+          startedTime: event.startTime,
+          endTime: event.endTime
         }));
 
         setEvents(formattedEvents);
       })
       .catch(error => console.error("Error fetching events:", error));
   }, []);
+
   const eventRenderer = ({ event }) => (
     <div className="flex flex-col items-start p-1 w-full h-full">
-      <strong className="text-[9px] lg:text-xl">{event.title}</strong>
-      <p className="lg:text-xs text-[9px] text-white">{event.notes}</p>
+      <strong className="text-[9px] lg:text-xl">{event.notes}</strong>
+      <p className="lg:text-xs text-[9px] text-white">{event.startedTime} - {event.endTime}</p>
     </div>
   );
 

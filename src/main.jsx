@@ -8,6 +8,7 @@ import {
 import MainLayout from './Layout/MainLayout';
 import Schedule from './Pages/Schedule/Schedule';
 import AddBooking from './Pages/AddBooking/AddBooking';
+import Profile from './Components/Profile';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path:'/addBooking',
         element: <AddBooking></AddBooking>
+      },
+      {
+        path:'/profile',
+        element: <Profile></Profile>
       }
     ]
   },

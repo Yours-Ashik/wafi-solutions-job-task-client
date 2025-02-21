@@ -12,7 +12,7 @@ const Navbar = () => {
                 {/* Left Side */}
                 <div className="flex-1">
                     <Link to="/" className=" text-2xl lg:text-3xl font-bold">
-                        Car Booking
+                        Car Wash
                     </Link>
                 </div>
 

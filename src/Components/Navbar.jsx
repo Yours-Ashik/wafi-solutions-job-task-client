@@ -1,88 +1,78 @@
-import { IoIosNotificationsOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
-import BookingModal from "./BookingModal"; // Import the modal component
+import BookingModal from "./BookingModal";
 
 const Navbar = () => {
     const openModal = () => {
         document.getElementById("my_modal_3").showModal();
     };
 
-    const links = (
-        <>
-            <li>
-                {/* Open modal  */}
-                <button
-                    onClick={openModal}
-                    className="bg-[#636AE8] mr-2 text-white text-md rounded-md py-3 px-4"
-                >
-                    + Add Booking
-                </button>
-            </li>
-            <li>
-                <button className="text-gray-500 text-md text-3xl font-bold">
-                    <IoIosNotificationsOutline />
-                </button>
-            </li>
-        </>
-    );
-
     return (
-        <>
-            <div className="navbar bg-[#FAFAFB] lg:py-3">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16"
+        <div className="bg-[#FAFAFB]">
+            <div className="navbar mb-5   lg:px-10 px-4 py-5">
+                {/* Left Side */}
+                <div className="flex-1">
+                    <Link to="/" className=" text-2xl lg:text-3xl font-bold">
+                        Car Booking
+                    </Link>
+                </div>
+
+                {/* Right Side */}
+                <div className="flex-none gap-4 flex items-center">
+                    {/* Add Booking Button */}
+                    <button
+                        onClick={openModal}
+                        className="bg-[#636AE8] hover:bg-[#636AE8] focus:bg-[#636AE8] focus:text-white text-white text-md rounded-md lg:py-3 py-2 px-2 lg:px-4 transition-all hover:scale-95 lg:mr-5 mr-2"
+                    >
+                        + Add Booking
+                    </button>
+
+                    {/* Notifications Icon */}
+
+                    <div className="dropdown dropdown-end mr-3 lg:mr-5">
+                        <div tabIndex={0} role="button">
+                            <div className="w-8 h-8"> 
+                                <img
+                                    className="w-full h-full object-contain"
+                                    src="https://img.icons8.com/?size=40&id=41913&format=png"
+                                    alt="Notification"
                                 />
-                            </svg>
+                            </div>
                         </div>
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                         >
-                            {links}
-                        </ul>
-                    </div>
-                    <Link to="/" className="text-2xl flex items-center gap-2 font-bold">
-                        
-                        Car Booking
-                    </Link>
-                </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">{links}</ul>
-                </div>
-                <div className="navbar-end">
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="m-1">
-                            <img
-                                className="h-14 w-14"
-                                src="https://img.icons8.com/?size=48&id=Hj21JM30swCm&format=png"
-                                alt=""
-                            />
-                        </div>
-                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                             <li>
-                                <Link to="/profile">Profile</Link>
+                                <h2>No Notification</h2>
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
 
-            {/* Add Modal*/}
-            <BookingModal />
-        </>
+
+                    {/* Profile Dropdown */}
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className=" rounded-full">
+                                <img
+                                    className=""
+                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                    alt="Profile"
+                                />
+                            </div>
+                        </div>
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li>
+                                <Link to="/profile">Profile</Link>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Add Booking Modal */}
+                <BookingModal />
+            </div>
+        </div>
     );
 };
 

@@ -1,12 +1,14 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const BookingModal = () => {
+
 
     const formData = (e) => {
         e.preventDefault()
         const form = e.target;
         const notes = form.notes.value;
-        const carName  = form.carName.value;
+        const carName = form.carName.value;
         const startDate = form.startDate.value;
         const endDate = form.endDate.value;
         const startTime = form.startTime.value;
@@ -21,17 +23,29 @@ const BookingModal = () => {
             endTime
         }
         console.log(data)
-        axios.post("http://localhost:5000/schedule", data)
-        .then(res => {
-            console.log(res.data)
-        })
+        axios.post("https://job-task-server-six-tau.vercel.app/schedule", data)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        title: 'Booking Added',
+                        text: 'Your Booking Added In The Schedule',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                    form.reset()
+                    document.getElementById("my_modal_3").close();
+
+
+                }
+            })
     }
 
     return (
         <dialog id="my_modal_3" className="modal">
             <div className="modal-box lg:w-[50%] w-[90%] rounded-xl max-w-none p-7 ">
                 <form method="dialog">
-                    
+
                     <button className="btn btn-sm btn-circle btn-ghost m-5 lg:m-7 absolute right-2 top-2">
                         ✕
                     </button>
@@ -47,7 +61,7 @@ const BookingModal = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Notes</span>
                             </label>
-                            <input type="text"  name="notes" placeholder="Write Your Notes" className="input input-bordered w-full bg-[#F3F4F6] rounded-full border-none" required />
+                            <input type="text" name="notes" placeholder="Write Your Notes" className="input input-bordered w-full bg-[#F3F4F6] rounded-full border-none" required />
                         </div>
                         {/* Select Car Input */}
                         <div className="form-control w-full ">
